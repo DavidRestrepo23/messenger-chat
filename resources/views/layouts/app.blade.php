@@ -28,25 +28,20 @@
             <b-collapse is-nav id="nav_text_collapse">
                 <b-navbar-nav class="ml-auto">
                     @guest
-                        <b-nav-item href="#">Ingresar</b-nav-item>
-                        <b-nav-item href="#">Registro</b-nav-item>
+                        <b-nav-item href="{{route('login')}}">Ingresar</b-nav-item>
+                        <b-nav-item href="{{route('register')}}">Registro</b-nav-item>
                     @else
                     <!-- Navbar dropdowns -->
-                    <b-nav-item-dropdown text="Lang" right>
-                        <b-dropdown-item href="#">EN</b-dropdown-item>
-                        <b-dropdown-item href="#">ES</b-dropdown-item>
-                        <b-dropdown-item href="#">RU</b-dropdown-item>
-                        <b-dropdown-item href="#">FA</b-dropdown-item>
-                    </b-nav-item-dropdown>
-                    <b-nav-item-dropdown text="Username" right>
-                        <b-dropdown-item href="#">Cerrar sesión</b-dropdown-item>
+                    <b-nav-item-dropdown text="{{ auth()->user()->name }}" right>
+                        <b-dropdown-item href="#" @click="logout">Cerrar sesión</b-dropdown-item>
                     </b-nav-item-dropdown>
                    @endguest 
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
-        
-
+        <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display:none;">
+            @csrf
+        </form>
         <main class="py-4">
             @yield('content')
         </main>

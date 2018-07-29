@@ -9737,7 +9737,6 @@ module.exports = __webpack_require__(73);
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bootstrap_vue__ = __webpack_require__(102);
-
 __webpack_require__(74);
 
 window.Vue = __webpack_require__(99);
@@ -9749,7 +9748,12 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue__["a" /* default */]);
 Vue.component('example-component', __webpack_require__(215));
 
 var app = new Vue({
-    el: '#app'
+    el: '#app',
+    methods: {
+        logout: function logout() {
+            document.getElementById('logout-form').submit();
+        }
+    }
 });
 
 /***/ }),

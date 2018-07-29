@@ -5,8 +5,17 @@
     <b-row align-h="center">
         <b-col cols="8">
             <b-card title="Inicio de sesión">
-                <b-alert show>Default Alert</b-alert>
-                <b-form>
+                @if($errors->any())
+                    <b-alert show variant="danger">
+                         @foreach($errors->all() as $error)
+                            <ul class="mb-0">
+                                <li>{{ $error }}</li> 
+                            </ul>
+                        @endforeach
+                    </b-alert>
+                @endif
+                <b-form method="POST" action="{{ route('login') }}" >
+                    @csrf
                         <b-form-group id="email" label="Correo electrónico" label-for="email">
                                 <b-form-input type="email"  
                                     name="email" value="{{ old('email') }}" 
@@ -16,7 +25,7 @@
                         </b-form-group>
                         <b-form-group id="password" label="Contraseña" label-for="password">
                                 <b-form-input type="password" 
-                                    name="password" value="{{ old('password') }}" 
+                                    name="password"
                                     required autofocus>
                                 </b-form-input>
                         </b-form-group>
