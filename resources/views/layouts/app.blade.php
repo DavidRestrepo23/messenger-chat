@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,8 +20,8 @@
     <!-- Styles -->
     
 </head>
-<body>
-    <div id="app">
+<body class="h-100">
+    <div id="app" class="h-100">
          <b-navbar toggleable type="dark" variant="primary">
             <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
             <b-navbar-brand href="{{ url('/') }}">{{config('app.name', 'Laravel')}}</b-navbar-brand>
@@ -42,7 +42,7 @@
         <form action="{{ route('logout') }}" method="POST" id="logout-form" style="display:none;">
             @csrf
         </form>
-        <main class="py-4">
+        <main class="py-4" style="height: calc(100vh - 56px)">
             @yield('content')
         </main>
     </div>
