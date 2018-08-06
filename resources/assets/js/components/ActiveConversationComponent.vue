@@ -6,19 +6,11 @@
                     footer-border-variant="dark"
                     title="Conversación Activa"
                     class="h-100">
-                <b-media vertical-align="center" class="mb-2">
-                    <b-img slot="aside" rounded="circle" blank blank-color="#ccc" width="60" alt="placeholder" />
-                    <b-card>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                    sollicitudin. Cras purus odio
-                    </b-card>
-                </b-media>
-                <b-media right-align vertical-align="center" class="mb-2">
-                    <b-img slot="aside" rounded="circle" blank blank-color="#ccc" width="60" alt="placeholder" />
-                    <b-card>
-                        Cras sit amet nibh libero jajajaja!
-                    </b-card>
-                </b-media>
+
+                    <message-conversation-component v-for="(message) in messages" :key="message.id" :written-by-me="message.written_by_me"> 
+                       {{ message.content }}
+                    </message-conversation-component>
+                    
                 <div slot="footer">
                     <b-form class="mb-0" inline>
                         <b-input-group style="width:100%">
@@ -43,13 +35,18 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return {
-              
-            };
-        },
-
-    }
+export default {
+  data() {
+    return {
+      messages: []
+    };
+  },
+  mounted() {
+    axios.get("/api/messages").then(response => {
+      console.log(response.data);
+      this.messages = response.data;
+    });
+  }
+};
 </script>
 
