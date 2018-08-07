@@ -6,7 +6,6 @@
                <slot></slot>
             </b-card>
         </b-media>
-        
     </div>
 </template>
 
