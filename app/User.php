@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Relation ORM with conversations
+     */
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
 }

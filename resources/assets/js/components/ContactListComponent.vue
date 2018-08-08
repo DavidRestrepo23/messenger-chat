@@ -8,21 +8,28 @@
             </b-form-input>
         </b-form>
         <b-list-group>
-            <contact-component variant="dark"></contact-component>
-            <contact-component variant=""></contact-component>
-            <contact-component variant="secondary"></contact-component>
+            <contact-component v-for="conversation in conversations" :key="conversation.id" :conversation="conversation"></contact-component>
         </b-list-group>
     </div>
     
 </template>
 
 <script>
-    export default {
-        data(){
-            return {
-                
-            };
-        }
-       
+export default {
+  data() {
+    return {
+      conversations: []
+    };
+  },
+  mounted() {
+    this.getConversations();
+  },
+  methods: {
+    getConversations() {
+      axios.get("/api/conversations").then(response => {
+        this.conversations = response.data;
+      });
     }
+  }
+};
 </script>
