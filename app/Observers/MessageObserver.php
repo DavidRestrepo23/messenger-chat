@@ -14,7 +14,10 @@ class MessageObserver
      * @return void
      */
     public function created(Message $message)
-    {
+    {   
+
+
+        //Quien envia
         $conversation = Conversation::where('user_id', $message->from_id)->where('contact_id', $message->to_id)->first();
 
         if ($conversation) {
@@ -23,10 +26,11 @@ class MessageObserver
             $conversation->save();
         }
 
+        //Quien recibe
         $conversation = Conversation::where('contact_id', $message->from_id)->where('user_id', $message->to_id)->first();
 
         if ($conversation) {
-            $conversation->last_message = $message->contact_name . ": " . $message->content;
+            $conversation->last_message = $conversation->contact_name . ": " . $message->content;
             $conversation->last_time = $message->created_at;
             $conversation->save();
         }
