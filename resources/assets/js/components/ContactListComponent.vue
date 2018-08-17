@@ -7,8 +7,9 @@
                     placeholder="Buscar contacto...">
             </b-form-input>
         </b-form>
-        <b-list-group>
+        <b-list-group >
             <contact-component 
+            class="contact" 
             v-for="conversation in conversations" 
             :key="conversation.id" 
             :conversation="conversation"
@@ -37,8 +38,19 @@ export default {
       });
     },
     selectConversation(conversation) {
-      console.log(conversation);
+      this.$emit("conversationSelected", conversation);
     }
   }
 };
 </script>
+
+
+<style>
+.contact {
+  cursor: pointer;
+}
+
+.contact:hover {
+  background-color: #cccccc;
+}
+</style>

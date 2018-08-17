@@ -4,7 +4,7 @@
             <b-card 
                     footer-bg-variant="default"
                     footer-border-variant="dark"
-                    title="Conversación Activa"
+                    title="Conversación Activa "
                     class="h-100">
 
                     <message-conversation-component v-for="(message) in messages" :key="message.id" :written-by-me="message.written_by_me"> 
@@ -25,7 +25,7 @@
         </b-col>
         <b-col cols="4">
             <b-img rounded="circle" blank width="80" height="80" blank-color="#777" alt="img" class="m-1 p-0" />
-            <p>Usuario Seleccionado</p>
+            <p>{{ contactName }} </p>
             <hr>
             <b-form-checkbox>
                 Desactivar notificaciones
@@ -39,15 +39,18 @@ export default {
   data() {
     return {
       messages: [],
-      newMessage: "",
-      contactId: 2
+      newMessage: ""
     };
+  },
+  props: {
+    contactId: Number,
+    contactName: String
   },
   mounted() {
     this.getMessages();
   },
   methods: {
-    getMessages() {
+    getMessages(value) {
       axios.get(`/api/messages?contact_id=${this.contactId}`).then(response => {
         this.messages = response.data;
       });
@@ -62,6 +65,11 @@ export default {
           console.log(response.data);
           (this.messages = ""), this.getMessages();
         });
+    }
+  },
+  watch: {
+    contactId() {
+      this.getMessages();
     }
   }
 };
