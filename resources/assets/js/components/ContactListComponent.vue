@@ -9,16 +9,15 @@
         </b-form>
         <b-list-group >
             <contact-component 
-            class="contact" 
-            v-for="conversation in conversations" 
-            :key="conversation.id" 
-            :conversation="conversation"
-            @click.native="selectConversation(conversation)"
+              class="contact" 
+              v-for="conversation in conversations" 
+              :key="conversation.id" 
+              :conversation="conversation"
+              @click.native="selectConversation(conversation)"
             >
            </contact-component>
         </b-list-group>
     </div>
-    
 </template>
 
 <script>

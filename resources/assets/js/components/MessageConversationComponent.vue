@@ -12,11 +12,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      content: "hola"
-    };
-  },
   props: {
     writtenByMe: Boolean
   }

@@ -7,7 +7,11 @@
                     title="Conversación Activa "
                     class="h-100">
 
-                    <message-conversation-component v-for="(message) in messages" :key="message.id" :written-by-me="message.written_by_me"> 
+                    <message-conversation-component 
+                       v-for="(message) in messages" 
+                        :key="message.id" 
+                        :written-by-me="message.written_by_me"
+                       > 
                        {{ message.content }}
                     </message-conversation-component>
                     
@@ -38,23 +42,16 @@
 export default {
   data() {
     return {
-      messages: [],
       newMessage: ""
     };
   },
   props: {
     contactId: Number,
-    contactName: String
+    contactName: String,
+    messages: Array
   },
-  mounted() {
-    this.getMessages();
-  },
+
   methods: {
-    getMessages(value) {
-      axios.get(`/api/messages?contact_id=${this.contactId}`).then(response => {
-        this.messages = response.data;
-      });
-    },
     sendMessages() {
       axios
         .post("/api/messages", {
@@ -62,14 +59,8 @@ export default {
           content: this.newMessage
         })
         .then(response => {
-          console.log(response.data);
-          (this.messages = ""), this.getMessages();
+          this.newMessage = "";
         });
-    }
-  },
-  watch: {
-    contactId() {
-      this.getMessages();
     }
   }
 };
